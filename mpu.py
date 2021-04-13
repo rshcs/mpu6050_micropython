@@ -29,32 +29,12 @@ class Mpu:
     def temperature(self):
         outV = (self.mpu_raw[3] / 340.00) + 36.53
         return outV 
-        
-    def accx(self):
-        return self.mpu_raw[0]
-    
-    def accy(self):
-        return self.mpu_raw[1]
-    
-    def accz(self):
-        return self.mpu_raw[2]
-    
-    def gyrox(self):
-        return self.mpu_raw[4]
-    
-    def gyroy(self):
-        return self.mpu_raw[5]
-    
-    def gyroz(self):
-        return self.mpu_raw[6]
     
     def read_data(self):
         in_bytes = self.i2c.readfrom_mem(self.i2c_addr, self.STARTING_REG, 14)
         self.combine_bytes(in_bytes) # Combine all 7 pair of bytes
         
-        #print(self.gyrox(), self.gyroy(), self.gyroz(), '|', self.accx(), self.accy(), self.accz())
-        #print(self.temperature())
-        return [self.gyrox(), self.gyroy(), self.gyroz(), self.temperature(), self.accx(), self.accy(), self.accz()]
+        return self.mpu_raw[0:3] + [self.temperature()] + self.mpu_raw[4:7]
 
 
 if __name__ == '__main__':
@@ -63,5 +43,4 @@ if __name__ == '__main__':
     while True:
         print(angle.read_data())
         delay(1)
-        
-
+    
