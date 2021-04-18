@@ -3,7 +3,7 @@
 
 - [x] X Y Z Accelerometer raw outputs  
 - [x] X Y Z Gyro raw outputs
-- [x] Temperature optput in celsius 
+- [x] Temperature output in celsius 
 - [ ] Calibration
 - [ ] Lean angle from gyro/ Accelerometer reading   
 ---  
